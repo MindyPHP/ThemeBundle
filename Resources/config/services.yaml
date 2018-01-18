@@ -1,0 +1,25 @@
+parameters:
+    mindy.bundle.theme.public_path: '%kernel.project_dir%/public'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    _instanceof:
+        Mindy\Template\Library\LibraryInterface:
+            public: true
+            tags: ['template.library']
+
+    Mindy\Bundle\ThemeBundle\:
+        resource: '../../*'
+        exclude: '../../{Tests,Migrations,Model,vendor}'
+
+    Mindy\Bundle\ThemeBundle\Controller\:
+        resource: '../../Controller'
+        tags: ['controller.service_arguments']
+
+    Mindy\Bundle\ThemeBundle\ThemeManager\ThemeManager:
+        arguments:
+            - '%mindy.bundle.theme.public_path%'

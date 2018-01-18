@@ -1,0 +1,11 @@
+admin_theme_list:
+    path: ''
+    defaults:
+        _controller: \Mindy\Bundle\ThemeBundle\Controller\Admin\ThemeController::list
+
+admin_theme_apply:
+    path: /apply/{theme}
+    defaults:
+        _controller: \Mindy\Bundle\ThemeBundle\Controller\Admin\ThemeController::apply
+    requirements:
+        theme: \w+

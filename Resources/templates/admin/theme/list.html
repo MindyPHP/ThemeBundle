@@ -1,0 +1,33 @@
+{% extends "admin/base.html" %}
+
+{% block breadcrumbs %}
+    {% set breadcrumbs = [
+        ['name' => 'Темы оформления'],
+    ] %}
+    {% parent %}
+{% endblock %}
+
+{% block content %}
+    <h1 class="b-heading">Темы оформления</h1>
+
+    <table class="b-table">
+        <thead class="b-table__thead">
+        <tr class="b-table__tr">
+            <th class="b-table__th">Название</th>
+            <th class="b-table__th">Автор</th>
+        </tr>
+        </thead>
+        <tbody class="b-table__tbody">
+        {% for name, theme in themes %}
+            <tr class="b-table__tr">
+                <td class="b-table__td">
+                    <a href="{{ url('admin_theme_apply', ['theme' => name]) }}">
+                        {{ theme.getName() }}
+                    </a>
+                </td>
+                <td class="b-table__td">{{ theme.getAuthor() }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

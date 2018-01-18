@@ -1,0 +1,29 @@
+{
+    "name": "mindy/theme-bundle",
+    "description": "Theme manager for mindy",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Mindy\\Bundle\\ThemeBundle\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Maksim Falaleev",
+            "email": "max@studio107.ru"
+        }
+    ],
+    "require": {
+        "mindy/template-bundle": "~4.0",
+        "mindy/mindy-bundle": "~4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5",
+        "symfony/framework-bundle": "^3.4",
+        "symfony/security-bundle": "~3.0"
+    }
+}
