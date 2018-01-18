@@ -1,4 +1,5 @@
 parameters:
+    mindy.bundle.theme.theme: 'default'
     mindy.bundle.theme.public_path: '%kernel.project_dir%/public'
 
 services:
@@ -11,6 +12,10 @@ services:
         Mindy\Template\Library\LibraryInterface:
             public: true
             tags: ['template.library']
+
+        Mindy\Bundle\SettingBundle\Settings\SettingsInterface:
+            public: true
+            tags: ['settings']
 
     Mindy\Bundle\ThemeBundle\:
         resource: '../../*'

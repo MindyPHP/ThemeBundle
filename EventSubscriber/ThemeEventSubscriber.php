@@ -12,14 +12,13 @@ declare(strict_types=1);
 namespace Mindy\Bundle\ThemeBundle\EventSubscriber;
 
 use Mindy\Bundle\TemplateBundle\Finder\ThemeTemplateFinder;
+use Mindy\Bundle\ThemeBundle\ThemeManager\ThemeConstrants;
 use Mindy\Bundle\ThemeBundle\ThemeManager\ThemeManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class ThemeEventSubscriber implements EventSubscriberInterface
 {
-    const COOKIE_NAME = '__theme_preview';
-
     /**
      * @var ThemeTemplateFinder
      */
@@ -47,11 +46,13 @@ class ThemeEventSubscriber implements EventSubscriberInterface
     public function onRequest(GetResponseEvent $event)
     {
         $request = $event->getRequest();
-        if ($request->cookies->has(self::COOKIE_NAME)) {
-            $themeName = $request->cookies->get(self::COOKIE_NAME);
+        if ($request->cookies->has(ThemeConstrants::COOKIE_NAME)) {
+            $themeName = $request->cookies->get(ThemeConstrants::COOKIE_NAME);
             if ($this->manager->hasTheme($themeName)) {
                 $this->finder->setTheme($themeName);
             }
+        } else {
+//            $this->finder->setTheme($themeName);
         }
     }
 

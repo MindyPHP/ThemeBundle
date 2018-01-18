@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace Mindy\Bundle\ThemeBundle\ThemeManager;
 
+use Mindy\Bundle\SettingBundle\Settings\SettingsManager;
 use Mindy\Bundle\TemplateBundle\Finder\ThemeTemplateFinder;
-use Mindy\Template\Finder\FinderInterface;
 use function GuzzleHttp\json_decode;
 
 class ThemeManager
@@ -25,6 +25,10 @@ class ThemeManager
      * @var ThemeTemplateFinder
      */
     protected $themeTemplateFinder;
+    /**
+     * @var SettingsManager
+     */
+    protected $settingsManager;
 
     /**
      * ThemeManager constructor.
@@ -32,16 +36,17 @@ class ThemeManager
      * @param string              $publicDir
      * @param ThemeTemplateFinder $themeTemplateFinder
      */
-    public function __construct(string $publicDir, ThemeTemplateFinder $themeTemplateFinder)
+    public function __construct(string $publicDir, ThemeTemplateFinder $themeTemplateFinder, SettingsManager $settingsManager)
     {
         $this->projectPublicDir = $publicDir;
         $this->themeTemplateFinder = $themeTemplateFinder;
+        $this->settingsManager = $settingsManager;
     }
 
     /**
-     * @return FinderInterface
+     * @return ThemeTemplateFinder
      */
-    public function getFinder(): FinderInterface
+    public function getFinder(): ThemeTemplateFinder
     {
         return $this->themeTemplateFinder;
     }
@@ -94,7 +99,9 @@ class ThemeManager
      */
     public function applyTheme($themeName): bool
     {
-        throw new \LogicException('Not implemented');
+        return $this->settingsManager->set([
+            'mindy.bundle.theme.theme' => $themeName
+        ]);
     }
 
     /**

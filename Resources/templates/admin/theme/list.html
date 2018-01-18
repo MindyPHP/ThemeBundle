@@ -13,19 +13,34 @@
     <table class="b-table">
         <thead class="b-table__thead">
         <tr class="b-table__tr">
+            <th class="b-table__th"></th>
             <th class="b-table__th">Название</th>
             <th class="b-table__th">Автор</th>
+            <th class="b-table__th"></th>
         </tr>
         </thead>
         <tbody class="b-table__tbody">
         {% for name, theme in themes %}
             <tr class="b-table__tr">
                 <td class="b-table__td">
-                    <a href="{{ url('admin_theme_apply', ['theme' => name]) }}">
-                        {{ theme.getName() }}
-                    </a>
+                    {% if name == current_theme %}
+                        <div class="b-icon">check</div>
+                    {% endif %}
+                </td>
+                <td class="b-table__td">
+                    {{ theme.getName() }}
                 </td>
                 <td class="b-table__td">{{ theme.getAuthor() }}</td>
+                <td class="b-table__td">
+                    <a class="b-button" href="{{ url('admin_theme_apply', ['theme' => name]) }}">
+                        Применить
+                    </a>
+                    {% if name !== current_theme %}
+                        <a class="b-button" href="{{ url('admin_theme_preview', ['theme' => name]) }}">
+                            Предпросмотр
+                        </a>
+                    {% endif %}
+                </td>
             </tr>
         {% endfor %}
         </tbody>

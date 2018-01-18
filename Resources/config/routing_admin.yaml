@@ -8,4 +8,18 @@ admin_theme_apply:
     defaults:
         _controller: \Mindy\Bundle\ThemeBundle\Controller\Admin\ThemeController::apply
     requirements:
-        theme: \w+
+        theme: '[a-zA-Z0-9_-]+'
+
+admin_theme_preview:
+    path: /preview/{theme}
+    defaults:
+        _controller: \Mindy\Bundle\ThemeBundle\Controller\Admin\ThemeController::preview
+    requirements:
+        theme: '[a-zA-Z0-9_-]+'
+
+admin_theme_cancel_preview:
+    path: /cancel_preview/{theme}
+    defaults:
+        _controller: \Mindy\Bundle\ThemeBundle\Controller\Admin\ThemeController::cancelPreview
+    requirements:
+        theme: '[a-zA-Z0-9_-]+'

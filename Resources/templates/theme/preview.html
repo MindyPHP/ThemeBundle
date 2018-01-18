@@ -1,0 +1,38 @@
+{% extends "theme/base.html" %}
+
+{% block content %}
+    <style>
+        body {
+            position: relative;
+        }
+        #toolbar {
+            position: absolute;
+            height: 100px;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 3;
+            background-color: #f1f1f1;
+        }
+        #preview {
+            position: absolute;
+            z-index: 2;
+            top: 100px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 100px);
+        }
+    </style>
+
+    <div id="toolbar">
+        <select name="theme" id="theme_select" onchange="window.location=this.value">
+            {% for slug, theme in themes %}
+                <option value="{{ url('admin_theme_preview', ['theme' => slug]) }}"{% if current_theme == slug %} selected{% endif %}>{{ theme.getName() }}</option>
+            {% endfor %}
+        </select>
+
+        <a href="{{ url('admin_theme_list') }}">Вернуться к списку тем</a>
+        <a href="{{ url('admin_theme_apply', ['theme' => current_theme]) }}">Применить</a>
+    </div>
+    <iframe src="/catalog" frameborder="0" id="preview"></iframe>
+{% endblock %}
